@@ -1,7 +1,7 @@
 {
   "name": "pointvc",
   "description": "Open VSCode projects from tray menu.",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "main": "main.js",
   "author": "Krowli <lionmause999@gmail.com>",
   "scripts": {
@@ -15,13 +15,10 @@
     "dist:linux": "electron-builder --linux",
     "postinstall": "electron-builder install-app-deps"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/Krowli/pointvc"
-  },
   "dependencies": {
     "@sentry/electron": "0.17.1",
     "auto-launch": "^5.0.5",
+    "electron-is": "^3.0.0",
     "electron-progressbar": "^1.2.0",
     "electron-store": "^4.0.0",
     "fix-path": "^2.1.0",
@@ -37,11 +34,13 @@
     "nodemon": "^1.19.1"
   },
   "build": {
-    "publish": [{
-      "provider": "github",
-      "owner": "krowli",
-      "repo": "pointvc"
-    }],
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "krowli",
+        "repo": "pointvc"
+      }
+    ],
     "appId": "krowli.com",
     "productName": "pointvc",
     "mac": {

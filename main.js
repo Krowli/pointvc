@@ -3,21 +3,31 @@ const { app, Menu, Tray, dialog } = require("electron");
 const { spawn } = require("child_process");
 const fixPath = require("fix-path");
 const fs = require("fs");
+
 const Store = require("electron-store");
 const Sentry = require("@sentry/electron");
+const is = require("electron-is");
 const AutoLaunch = require("auto-launch");
+const initAutoUpdate = require("update-electron-app");
+
 const ElectronSampleAppLauncher = new AutoLaunch({
-  name: "Electron-sample-app",
+  name: "pointvc",
 });
-require("update-electron-app")();
+
+if (is.windows()) {
+  initAutoUpdate({
+    repo: "krowli/pointvc",
+  });
+}
+
 fixPath();
 
 Sentry.init({
-  dsn: "https://1b620b81c44a4520ad5b1138aed08ad6@sentry.io/1546533",
+  dsn: "https://bccb8a0ccb3040e6a1f2effdeec8e6be@sentry.io/1546752",
 });
 
 const schema = {
-  pointvc: {
+  projects: {
     type: "string",
   },
 };
@@ -34,16 +44,7 @@ const store = new Store({ schema });
   Language on computer
 */
 function getLocale() {
-  const locale = app.getLocale();
-
-  switch (locale) {
-    case "es-419" || "es":
-      return JSON.parse(fs.readFileSync(resolve(__dirname, "locale/es.json")));
-    case "pt-BR" || "pt-PT":
-      return JSON.parse(fs.readFileSync(resolve(__dirname, "locale/pt.json")));
-    default:
-      return JSON.parse(fs.readFileSync(resolve(__dirname, "locale/en.json")));
-  }
+  return JSON.parse(fs.readFileSync(resolve(__dirname, "locale/en.json")));
 }
 
 function render(tray = mainTray) {
@@ -61,9 +62,21 @@ function render(tray = mainTray) {
         },
       },
       {
+        label: locale.openA,
+        click: () => {
+          spawn("atom", [path], { shell: true });
+        },
+      },
+      {
         label: locale.pull,
         click: () => {
           spawn(`cd ${path} && git pull`, { shell: true });
+        },
+      },
+      {
+        label: locale.push,
+        click: () => {
+          spawn(`cd ${path} && git push`, { shell: true });
         },
       },
       {

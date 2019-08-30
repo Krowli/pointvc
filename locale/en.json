@@ -1,7 +1,9 @@
 {
   "open": "Open with VSCode",
+  "openA": "Open with Atom",
   "add": "Add new project folder...",
   "pull": "git pull",
   "close": "Quit",
-  "remove": "Remove"
+  "remove": "Remove",
+  "push": "Push"
 }
