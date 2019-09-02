@@ -1,7 +1,7 @@
 {
   "name": "pointvc",
   "description": "Open VSCode projects from tray menu.",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "main": "main.js",
   "author": "Krowli <lionmause999@gmail.com>",
   "scripts": {
@@ -34,13 +34,11 @@
     "nodemon": "^1.19.1"
   },
   "build": {
-    "publish": [
-      {
-        "provider": "github",
-        "owner": "krowli",
-        "repo": "pointvc"
-      }
-    ],
+    "publish": [{
+      "provider": "github",
+      "owner": "krowli",
+      "repo": "pointvc"
+    }],
     "appId": "krowli.com",
     "productName": "pointvc",
     "mac": {

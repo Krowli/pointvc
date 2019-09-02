@@ -56,6 +56,14 @@ function render(tray = mainTray) {
     label: name,
     submenu: [
       {
+        label: locale.openinfolder,
+        click: () => {
+          spawn(`cd ${path} && ${is.windows() ? 'start .' : 'open .'}`, {
+            shell: true,
+          });
+        },
+      },
+      {
         label: locale.open,
         click: () => {
           spawn("code", [path], { shell: true });
